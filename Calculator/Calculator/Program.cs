@@ -43,6 +43,40 @@ namespace Calculator
             double result = Math.Pow(a, b);
             return result;
         }
+        static int Mod(int a)
+        { 
+            //funkce spocita zbytek po deleni dvema
+            int mod = a % 2;
+            return mod;
+        }
+        static int ResultOfDivision (int a)
+        {
+            //spocita vysledek po deleni dvema. Vysledkem je nejblizsi nezsi nebo stejne celle cislo skutecnemu vysledku
+            int resultOfDivision;
+            if (a % 2 == 0)
+            {
+                resultOfDivision = a / 2;
+            }
+            else
+            {
+                resultOfDivision= (a - 1) / 2;
+            }
+            return resultOfDivision;
+        }
+        static string BinarySystem(int a)
+        {
+            //prevede cislo do dvojkove soustavy
+            int mod;
+            string binaryNumber;
+            binaryNumber = string.Empty;    
+            while (a > 0)
+            {
+                mod = Mod(a);
+                binaryNumber += mod.ToString();
+                a = ResultOfDivision(a);
+            }
+            return binaryNumber;
+        }
         static void Main(string[] args)
         {
             /*
@@ -65,16 +99,20 @@ namespace Calculator
              * 3) Umozni uzivateli zadavat i desetinna cisla, tedy prekopej kalkulacku tak, aby umela pracovat s floaty
              */
             double a, b, result;
-            string matematicalOperation;
-            bool successA, successB;
+            int c;
+            string matematicalOperation, binaryNumber;
+            bool successA, successB, successC;
             successA = false;
             successB = false;
+            successC = false;
+            binaryNumber = "";
             result = 0;
             a = 0;
             b = 0;
+            c = 0;
 
             //program se zepta na matematickou operaci kterou chce uzivatel spocitat a ulozi odpoved do promene matematicalOperation
-            Console.WriteLine("Vyber jakou matematickou operaci budes chtit pocitat +, -, *, /, na (mocnina)");
+            Console.WriteLine("Vyber jakou matematickou operaci budes chtit pocitat +, -, *, /, na (mocnina), d (prevod do dvojkove soustavy)");
             matematicalOperation = Console.ReadLine();
 
             if (matematicalOperation == "+" || matematicalOperation == "-" || matematicalOperation == "*" || matematicalOperation == "/" || matematicalOperation == "na")
@@ -91,6 +129,16 @@ namespace Calculator
                 {
                     Console.WriteLine("Cislu b zatim nebyla prirazena zadna ciselna hodnota.Napis cislo b.");
                     successB = double.TryParse(Console.ReadLine(), out b);
+                }
+            }
+            else
+            {
+                //k prevodu do dvojkove soustavy se zepta na jedno cele cislo
+                Console.WriteLine("zadej cislo ktere chces prevest do dvojkove soustavi");
+                while (successC == false)
+                {
+                    Console.WriteLine("Cislu, které bude prevedeno do dvojkove soustavy, zatim nebyla prirazena zadna celociselna hodnota. Napis cislo, ktere chces prevest.");
+                    successC = int.TryParse(Console.ReadLine(), out c);
                 }
             }
 
@@ -113,10 +161,23 @@ namespace Calculator
                     result = Quotient(a, b);
                     break;
                 case "na":
+                    //spocita a na b
                     result = Pover(a, b);
                     break;
+                case "d":
+                    //prevede zadane cislo do dvojkove soustavy
+                    binaryNumber = BinarySystem(c);
+                    break;
             }
-            Console.WriteLine("Výsledek je " + result.ToString());
+            if (matematicalOperation == "d")
+            {
+                //vypise cislo prevedene do dvojkove soustavy
+                Console.WriteLine("Cislo ve dvojkové soustave(POZOR, cti pozpátku) je: " + binaryNumber);
+            }
+            else
+            {
+                Console.WriteLine("Vysledek je " + result.ToString());//vypise vysledek do konzole
+            }
             Console.ReadKey(); //Toto nech jako posledni radek, aby se program neukoncil ihned, ale cekal na stisk klavesy od uzivatele.
         }
     }
