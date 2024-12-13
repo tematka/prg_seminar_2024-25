@@ -10,7 +10,8 @@ namespace battleship
     {
         static char[,] CreateMyShipsBoard()
         {
-            char[,] myShips = new char[10, 10] {
+            //vytvoří tabulku, ve které budou umístěny moje lodě
+            char[,] myShipsBoard = new char[10, 10] {
                 {'-','-','-','-','-','-','-','-','-','-'},
                 {'-','-','-','-','-','-','-','-','-','-'},
                 {'-','-','-','-','-','-','-','-','-','-'},
@@ -22,11 +23,12 @@ namespace battleship
                 {'-','-','-','-','-','-','-','-','-','-'},
                 {'-','-','-','-','-','-','-','-','-','-'},
             };
-            return myShips;
+            return myShipsBoard;
         }
         static char[,] CreateComputersShipsBoard()
         {
-            char[,] computerShips = new char[10, 10] {
+            //vytvoří tabulku, ve které budou umístěny lodě počítače
+            char[,] computerShipsBoard = new char[10, 10] {
                 {'-','-','-','-','-','-','-','-','-','-'},
                 {'-','-','-','-','-','-','-','-','-','-'},
                 {'-','-','-','-','-','-','-','-','-','-'},
@@ -38,11 +40,83 @@ namespace battleship
                 {'-','-','-','-','-','-','-','-','-','-'},
                 {'-','-','-','-','-','-','-','-','-','-'},
             };
-            return computerShips;
+            return computerShipsBoard;
         }
+        static char[,] CreateComputersShotsBoard()
+        {
+            //vytvoří tabulku, kam se budou zaznamenávat moje střeli
+            char[,] myShotsBoard = new char[10, 10] {
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+            };
+            return myShotsBoard;
+        }
+        static char[,] CreateMyShotsBoard()
+        {
+            //vytvoří tabulku, kam se budou zaznamenávat střeli počítače
+            char[,] computerShotsBoard = new char[10, 10] {
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+                {'-','-','-','-','-','-','-','-','-','-'},
+            };
+            return computerShotsBoard;
+        }
+        static void WriteBoard(char[,] board)
+        {
+            Console.WriteLine("X  A B C D E F G H I J");
+            for (int i = 0; i < 10; i++)
+            {
+                if (i == 9)
+                {
+                    Console.Write(i + 1 + " ");
+                }
+                else
+                {
+                    Console.Write(i + 1 + "  ");
+                }
+                for (int j = 0; j < 10; j++)
+                {
+                    Console.Write(board[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+       /* static char[,] MyShot(char[,] board, int numberOfMyShips, int numberOfComputersShips)
+        {
+            bool column, row;
+            column = false;
+            row = false;
+            Console.WriteLine("")
+            return board;
+        }*/
         static void Main(string[] args)
         {
-           
+            int numberOfMyShips, numberOfComputersShips;
+            numberOfMyShips = 17;
+            numberOfComputersShips = 17;
+
+            char[,] myShipsBoard = CreateMyShipsBoard();
+            char[,] computersShipsBoard = CreateComputersShipsBoard();
+            char[,] myShotsBoard = CreateMyShotsBoard();
+            char[,] computersShotsBoard = CreateComputersShotsBoard();
+            WriteBoard(myShipsBoard);
+
+            Console.ReadKey();
         }
     }
 }
