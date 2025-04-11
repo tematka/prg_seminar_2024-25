@@ -43,10 +43,17 @@
             this.buttonPen = new System.Windows.Forms.Button();
             this.buttonRubber = new System.Windows.Forms.Button();
             this.buttonPenRainbow = new System.Windows.Forms.Button();
+            this.checkBoxFull = new System.Windows.Forms.CheckBox();
+            this.numericUpDownObjectWidth = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownObjectHeight = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPenWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownObjectWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownObjectHeight)).BeginInit();
             this.SuspendLayout();
             // 
             // panelPaiting
@@ -153,15 +160,17 @@
             this.buttonRectangle.TabIndex = 10;
             this.buttonRectangle.Text = "obdélník";
             this.buttonRectangle.UseVisualStyleBackColor = true;
+            this.buttonRectangle.Click += new System.EventHandler(this.buttonRectangle_Click);
             // 
             // buttonElips
             // 
-            this.buttonElips.Location = new System.Drawing.Point(844, 13);
+            this.buttonElips.Location = new System.Drawing.Point(831, 13);
             this.buttonElips.Name = "buttonElips";
             this.buttonElips.Size = new System.Drawing.Size(65, 42);
             this.buttonElips.TabIndex = 11;
             this.buttonElips.Text = "elipsa";
             this.buttonElips.UseVisualStyleBackColor = true;
+            this.buttonElips.Click += new System.EventHandler(this.buttonElips_Click);
             // 
             // buttonPen
             // 
@@ -193,12 +202,79 @@
             this.buttonPenRainbow.UseVisualStyleBackColor = true;
             this.buttonPenRainbow.Click += new System.EventHandler(this.buttonPenRainbow_Click);
             // 
+            // checkBoxFull
+            // 
+            this.checkBoxFull.AutoSize = true;
+            this.checkBoxFull.Location = new System.Drawing.Point(763, 135);
+            this.checkBoxFull.Name = "checkBoxFull";
+            this.checkBoxFull.Size = new System.Drawing.Size(51, 17);
+            this.checkBoxFull.TabIndex = 15;
+            this.checkBoxFull.Text = "výplň";
+            this.checkBoxFull.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDownObjectWidth
+            // 
+            this.numericUpDownObjectWidth.Location = new System.Drawing.Point(801, 70);
+            this.numericUpDownObjectWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownObjectWidth.Name = "numericUpDownObjectWidth";
+            this.numericUpDownObjectWidth.Size = new System.Drawing.Size(51, 20);
+            this.numericUpDownObjectWidth.TabIndex = 16;
+            this.numericUpDownObjectWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownObjectHeight
+            // 
+            this.numericUpDownObjectHeight.Location = new System.Drawing.Point(801, 105);
+            this.numericUpDownObjectHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownObjectHeight.Name = "numericUpDownObjectHeight";
+            this.numericUpDownObjectHeight.Size = new System.Drawing.Size(48, 20);
+            this.numericUpDownObjectHeight.TabIndex = 17;
+            this.numericUpDownObjectHeight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(749, 72);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "šířka";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(749, 107);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "výška";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Thistle;
             this.ClientSize = new System.Drawing.Size(989, 683);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.numericUpDownObjectHeight);
+            this.Controls.Add(this.numericUpDownObjectWidth);
+            this.Controls.Add(this.checkBoxFull);
             this.Controls.Add(this.buttonPenRainbow);
             this.Controls.Add(this.buttonRubber);
             this.Controls.Add(this.buttonPen);
@@ -220,6 +296,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownObjectWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownObjectHeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,6 +320,11 @@
         private System.Windows.Forms.Button buttonPen;
         private System.Windows.Forms.Button buttonRubber;
         private System.Windows.Forms.Button buttonPenRainbow;
+        private System.Windows.Forms.CheckBox checkBoxFull;
+        private System.Windows.Forms.NumericUpDown numericUpDownObjectWidth;
+        private System.Windows.Forms.NumericUpDown numericUpDownObjectHeight;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
 

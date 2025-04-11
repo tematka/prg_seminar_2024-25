@@ -12,9 +12,9 @@ namespace malovani2
 {
     public partial class Form1 : Form
     {
-        int X, Y, lastX, lastY, penWidth, penRed, penGreen, penBlue;
-        bool penDown, colorPlus, colorMinus;
-        string penType;
+        int X, Y, lastX, lastY, penWidth, penRed, penGreen, penBlue, objectHeight, objectWidth;
+        bool penDown, redPlus, greenPlus, bluePlus, paitingObject;
+        string penType, objectType;
 
         private void buttonPen_Click(object sender, EventArgs e)
         {
@@ -23,6 +23,7 @@ namespace malovani2
             penGreen = (int)trackBarGreen.Value;
             penBlue = (int)trackBarBlue.Value;
             penType = "pen";
+            objectType = "";
         }
 
         private void buttonRubber_Click(object sender, EventArgs e)
@@ -32,6 +33,27 @@ namespace malovani2
             penGreen = 255;
             penBlue = 255;
             penType = "rubber";
+            objectType = "";
+        }
+
+        private void buttonElips_Click(object sender, EventArgs e)
+        {
+            objectType = "elips";
+            penType = "";
+            penWidth = (int)trackBarPenWidth.Value;
+            penRed = (int)trackBarRed.Value;
+            penGreen = (int)trackBarGreen.Value;
+            penBlue = (int)trackBarBlue.Value;
+        }
+
+        private void buttonRectangle_Click(object sender, EventArgs e)
+        {
+            objectType = "rectangle";
+            penType = "";
+            penWidth = (int)trackBarPenWidth.Value;
+            penRed = (int)trackBarRed.Value;
+            penGreen = (int)trackBarGreen.Value;
+            penBlue = (int)trackBarBlue.Value;
         }
 
         private void trackBarRed_Scroll(object sender, EventArgs e)
@@ -56,6 +78,7 @@ namespace malovani2
             penGreen = (int)trackBarGreen.Value;
             penBlue = (int)trackBarBlue.Value;
             penType = "rainbow";
+            objectType = "";
         }
 
         private void panelPaiting_MouseDown(object sender, MouseEventArgs e)
@@ -63,10 +86,6 @@ namespace malovani2
             X = e.X;
             Y = e.Y;
             penDown = true;
-            /*penWidth = (int)trackBarPenWidth.Value;
-            penRed = (int)trackBarRed.Value;
-            penGreen = (int)trackBarGreen.Value;
-            penBlue = (int)trackBarBlue.Value;*/
         }
 
         private void trackBarPenWidth_Scroll(object sender, EventArgs e)
@@ -77,6 +96,16 @@ namespace malovani2
         private void buttonNew_Click(object sender, EventArgs e)
         {
             panelPaiting.Refresh();
+            penDown = false;
+            penWidth = (int)trackBarPenWidth.Value;
+            penRed = (int)trackBarRed.Value;
+            penGreen = (int)trackBarGreen.Value;
+            penBlue = (int)trackBarBlue.Value;
+            redPlus = true;
+            greenPlus = true;
+            bluePlus = true;
+            objectType = "";
+            penType = "pen";
         }
 
         private void panelPaiting_MouseUp(object sender, MouseEventArgs e)
@@ -92,6 +121,11 @@ namespace malovani2
             penRed = (int)trackBarRed.Value;
             penGreen = (int)trackBarGreen.Value;
             penBlue = (int)trackBarBlue.Value;
+            redPlus = true;
+            greenPlus = true;
+            bluePlus = true;
+            objectType = "";
+            penType = "pen";
         }
 
         private void panelPaiting_MouseMove(object sender, MouseEventArgs e)
@@ -105,11 +139,60 @@ namespace malovani2
             Brush brush = new SolidBrush(Color.FromArgb(penRed, penGreen, penBlue));
             if (penDown == true)
             {
-                if(penType == "rainbow")
+                if (penType == "rainbow")
                 {
-
+                    gr.DrawLine(pen, lastX, lastY, X, Y);
+                    gr.FillEllipse(brush, X - (penWidth / 2), Y - (penWidth / 2), penWidth, penWidth);
+                    if (penRed == 255)
+                    {
+                        redPlus = false;
+                    }
+                    if (penRed == 0)
+                    {
+                        redPlus = true;
+                    }
+                    if (penGreen == 255)
+                    {
+                        greenPlus = false;
+                    }
+                    if (penGreen == 0)
+                    {
+                        greenPlus = true;
+                    }
+                    if (penBlue == 255)
+                    {
+                        bluePlus = false;
+                    }
+                    if (penBlue == 0)
+                    {
+                        bluePlus = true;
+                    }
+                    if (redPlus == true)
+                    {
+                        penRed += 1;
+                    }
+                    else
+                    {
+                        penRed -= 1;
+                    }
+                    if (greenPlus == true)
+                    {
+                        penGreen += 1;
+                    }
+                    else
+                    {
+                        penGreen -= 1;
+                    }
+                    if (bluePlus == true)
+                    {
+                        penBlue += 1;
+                    }
+                    else
+                    {
+                        penBlue -= 1;
+                    }
                 }
-                else
+                if (penType == "pen" || penType == "rubber")
                 {
                     gr.DrawLine(pen, lastX, lastY, X, Y);
                     gr.FillEllipse(brush, X - (penWidth / 2), Y - (penWidth / 2), penWidth, penWidth);
@@ -119,7 +202,35 @@ namespace malovani2
 
         private void panelPaiting_MouseClick(object sender, MouseEventArgs e)
         {
-            
+            Graphics gr = panelPaiting.CreateGraphics();
+            X = e.X;
+            Y = e.Y;
+            objectWidth = (int)numericUpDownObjectWidth.Value;
+            objectHeight = (int)numericUpDownObjectHeight.Value;
+            Pen pen = new Pen(Color.FromArgb(penRed, penGreen, penBlue), penWidth);
+            Brush brush = new SolidBrush(Color.FromArgb(penRed, penGreen, penBlue));
+            if (checkBoxFull.Checked == true)
+            {
+                if (objectType == "elips")
+                {
+                    gr.FillEllipse(brush, X - (objectWidth / 2), Y - (objectHeight / 2), objectWidth, objectHeight);
+                }
+                if (objectType == "rectangle")
+                {
+                    gr.FillRectangle(brush, X - (objectWidth / 2), Y - (objectHeight / 2), objectWidth, objectHeight);
+                }
+            }
+            else
+            {
+                if (objectType == "elips")
+                {
+                    gr.DrawEllipse(pen, X - (objectWidth / 2), Y - (objectHeight / 2), objectWidth, objectHeight);
+                }
+                if (objectType == "rectangle")
+                {
+                    gr.DrawRectangle(pen, X - (objectWidth / 2), Y - (objectHeight / 2), objectWidth, objectHeight);
+                }
+            }
         }
     }
 }
