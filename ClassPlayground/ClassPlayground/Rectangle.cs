@@ -29,7 +29,7 @@ namespace ClassPlayground
         public bool ContainsPoint(double x, double y, double width, double height)
         {
             bool containsPoint = false;
-            if(x <= width && y <= height) 
+            if(x <= width && y <= height && x >= 0 && y >= 0) 
             { 
                 containsPoint = true;
             }
